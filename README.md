@@ -2,8 +2,9 @@
 
 We made an initial attempt to model 3D shapes like human modelers using deep reinforcement learning (DRL). This repository contains the source code for the paper [Modeling 3D Shapes by Reinforcement Learning](https://arxiv.org/abs/2003.12397).
 
-<img src="figures/demo-video.gif">
-
+<a href="https://arxiv.org/abs/2003.12397">
+<img src="imgs/teaser.jpg" style="width:400px; display: block; margin-left: auto; margin-right: auto;"/>
+</a>
 
 ## Code
 ### Installation

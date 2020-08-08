@@ -1,6 +1,6 @@
 ## Folder structure
 Please organize the file structure of this folder as following:
-
+```
 data
 |-- shape_binvox
 |   |-- airplane-02691156
@@ -19,7 +19,7 @@ data
         |-- airplane-02691156
         |-- car-02958343
         `-- guitar-03467517
-
+```
 **shape_binvox:** the voxlized groundtruth data of each category stored in .binvox file
 **shape_list:** the list of shape names of each category with demonstration/train/test split
 **shape_reference:** the shape reference of each cateogry
