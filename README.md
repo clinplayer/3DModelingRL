@@ -6,6 +6,7 @@ We made an initial attempt to model 3D shapes like human modelers using deep rei
 <img src="imgs/teaser.jpg" style="width:400px; display: block; margin-left: auto; margin-right: auto;"/>
 </a>
 
+
 ## Code
 ### Installation
 You need to install [PyTorch](https://pytorch.org/), [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/). This code is tested under Python 3.7.4, PyTorch 1.3.0, NumPy 1.17.2 and SciPy 1.3.1 on Ubuntu 18.04.4.
