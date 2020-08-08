@@ -42,8 +42,8 @@ def parse_args():
 
 def imitation_learning(agent, env, writer, shape_list):
     
+    episode_count = 0
     for epoch in range(p.DAGGER_EPOCH):
-    
         for shape_count in range(len(shape_list)):
 
             shape_name=shape_list[shape_count]
@@ -63,6 +63,7 @@ def imitation_learning(agent, env, writer, shape_list):
                 if not valid:
                     continue
                 
+                episode_count += 1
                 agent.memory_self.clear()
                 acm_r=0
                             
@@ -89,7 +90,7 @@ def imitation_learning(agent, env, writer, shape_list):
                     if done:
                         # log_info='IL_'+str(epoch)+'_shape_'+str(shape_count)+'_epi_'+str(episode)+'_r_'+str(format(acm_r, '.4f'))+'_'+shape_name
                         # env.output_result(log_info, save_tmp_result_path)
-                        writer.add_scalar('Mesh_IL/'+shape_category, acm_r, epoch*len(shape_list)+shape_count)
+                        writer.add_scalar('Mesh_IL/'+shape_category, acm_r, episode_count)
                         break
                     
                     s = s_
@@ -104,9 +105,8 @@ def imitation_learning(agent, env, writer, shape_list):
 
 def reinforcement_learning(agent, env, writer, shape_list):
     
-    #reinforcement process
+    episode_count = 0
     for epoch in range(p.RL_EPOCH):
-        
         for shape_count in range(len(shape_list)):
             
             shape_name=shape_list[shape_count]
@@ -124,6 +124,7 @@ def reinforcement_learning(agent, env, writer, shape_list):
             if not valid:
                 continue
             
+            episode_count+=1
             acm_r=0
             
             while True:
@@ -140,16 +141,16 @@ def reinforcement_learning(agent, env, writer, shape_list):
                     agent.learn(learning_mode=3, is_ddqn=True)
                 
                 if done:
-                    log_info='RL_'+str(epoch)+'_shape_'+str(shape_count)+'_r_'+str(format(acm_r, '.4f'))+'_'+shape_name
-                    env.output_result(log_info, save_tmp_result_path)
-                    writer.add_scalar('Mesh_RL/'+args.category, acm_r, shape_count)
+                    # log_info='RL_'+str(epoch)+'_shape_'+str(shape_count)+'_r_'+str(format(acm_r, '.4f'))+'_'+shape_name
+                    # env.output_result(log_info, save_tmp_result_path)
+                    writer.add_scalar('Mesh_RL/'+args.category, acm_r, episode_count)
                     break
                 
                 s = s_
                 loop = loop_    
                 step = step_
             
-            if shape_count % save_net_f == 0:
+            if episode_count % save_net_f == 0:
                 torch.save(agent.eval_net.state_dict(), save_net_path+'eval_RL_'+ shape_ref_type + '_'+ shape_category + '.pth')
                 torch.save(agent.target_net.state_dict(),  save_net_path+'target_RL_'+ shape_ref_type + '_'+ shape_category + '.pth')
 
@@ -164,8 +165,8 @@ if __name__ == "__main__":
     shape_vox_path=args.data_root + 'shape_binvox/' + shape_category + '/'
     edgeloop_path=args.data_root + 'prim_result/' + shape_ref_type + '/'+ shape_category + '/'
     
-    IL_shapelist_path=args.data_root + 'shape_list/' + shape_category + '-demo.txt'
-    RL_shapelist_path=args.data_root + 'shape_list/' + shape_category + '-train.txt'
+    IL_shapelist_path=args.data_root + 'shape_list/' + shape_category +'/' + shape_category + '-demo.txt'
+    RL_shapelist_path=args.data_root + 'shape_list/' + shape_category +'/' + shape_category + '-train.txt'
   
     save_net_path=args.save_net
     save_net_f = args.save_net_f

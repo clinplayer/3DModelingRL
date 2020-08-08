@@ -32,9 +32,7 @@ def parse_args():
     return args
 
 def test(agent, env, shape_list):
-    
-    all_reward=[]
-    
+        
     for shape_count in range(len(shape_list)):
         
         shape_name=shape_list[shape_count]
@@ -46,31 +44,22 @@ def test(agent, env, shape_list):
         print('Shape:', shape_count, 'name:', shape_name)
         
         s, box, step = env.reset(shape_infopack)
-        
-        acm_r=0
-            
+                    
         while True:
             
             valid_mask = env.get_valid_action_mask(box)
             a = agent.choose_action(s, box, step, valid_mask, 1.0)
             s_, box_, step_, r, done = env.next(a)
-                        
-            acm_r+=r
-            
+                                    
             if done:
-                all_reward.append(acm_r)
-                log_info=shape_name+'_r_'+str(format(acm_r, '.4f'))
-                
-                env.output_result(log_info, save_result_path)
+                env.output_result(shape_name+'-color', save_result_path)
                 env.save_edgeloop(save_result_path)
                 break
             
             s = s_
             box = box_    
             step = step_
-            
-    return np.mean(all_reward)
-        
+                    
 
 if __name__ == "__main__":
 
@@ -82,6 +71,7 @@ if __name__ == "__main__":
     shape_vox_path=args.data_root + 'shape_binvox/' + shape_category + '/'
     
     load_net_path=args.load_net + shape_ref_type + '/' + shape_category + '.pth'
+    train_shapelist_path=args.data_root + 'shape_list/' + shape_category +'/' + shape_category + '-train.txt'
     test_shapelist_path=args.data_root + 'shape_list/' + shape_category +'/' + shape_category + '-test.txt'
     
     save_result_path = args.save_result + shape_ref_type+'/'+shape_category + '/'
@@ -91,11 +81,12 @@ if __name__ == "__main__":
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     
     #shape list
+    train_shapelist=utils.load_filelist(train_shapelist_path)
     test_shapelist=utils.load_filelist(test_shapelist_path)
-
+    shapelist=train_shapelist+test_shapelist
+    
     #initialize
     env = Environment()
     agent = Agent(load_net_path)
-    mean_reward = test(agent, env, test_shapelist)
+    test(agent, env, shapelist)
     
-    print(mean_reward)

@@ -118,7 +118,7 @@ class Environment():
                     
                     map_action[i][j][k-1]=action_id
                     
-                    if k > 2.5:
+                    if k >= 3:
                         k = k - 5
                     para = np.array([i, j, k])
                     action_map[action_id] = para
@@ -188,14 +188,10 @@ class Environment():
         
         #voxelize the boxes
         canvas = np.zeros_like(self.target, dtype=np.int)
+        
+        clip_box = np.clip(box, 0, self.vox_size_l-1)
         for i in range(self.box_num):
-            x1, y1, z1, x2, y2, z2 = box[i][0], box[i][1], box[i][2], box[i][3], box[i][4], box[i][5]
-            x = np.clip(x1, 0, self.vox_size_l)
-            y = np.clip(y1, 0, self.vox_size_l)
-            z = np.clip(z1, 0, self.vox_size_l)
-            x_ = np.clip(x2, 0, self.vox_size_l)
-            y_ = np.clip(y2, 0, self.vox_size_l)
-            z_ = np.clip(z2, 0, self.vox_size_l)
+            [x, y, z, x_, y_, z_] = clip_box[i][0:6]
             canvas[x:x_, y:y_, z:z_] = 1
         
         intersect = canvas & self.target
@@ -214,7 +210,7 @@ class Environment():
 
             else:
                 single_canvas = np.zeros((self.vox_size_l, self.vox_size_l, self.vox_size_l), dtype=np.int)
-                [x, y, z, x_, y_, z_] = self.all_boxes[i][0:6]
+                [x, y, z, x_, y_, z_] = clip_box[i][0:6]
                 single_canvas[x:x_, y:y_, z:z_] = 1
 
                 single_intersect = single_canvas & self.target
@@ -301,23 +297,11 @@ class Environment():
             #edit action
             else:
                 bc = boxes[i][j]+ k
-                if j == 0:
-                    if bc>boxes[i][3] or bc < 0:
-                        valid_mask[a]=0                    
-                elif j == 1:
-                    if bc>boxes[i][4] or bc < 0:
+                if j<=2:
+                    if bc>boxes[i][j+3] or bc < 0:
                         valid_mask[a]=0
-                elif j == 2:
-                    if bc>boxes[i][5] or bc < 0:
-                        valid_mask[a]=0
-                elif j == 3:
-                    if bc<boxes[i][0] or bc > self.vox_size_l:
-                        valid_mask[a]=0
-                elif j == 4:
-                    if bc<boxes[i][1] or bc > self.vox_size_l:
-                        valid_mask[a]=0
-                elif j == 5:
-                    if bc<boxes[i][2] or bc > self.vox_size_l:
+                elif j>=3:
+                    if bc<boxes[i][j-3] or bc > self.vox_size_l:
                         valid_mask[a]=0
                 
         return valid_mask

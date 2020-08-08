@@ -1,40 +1,55 @@
-# ScanComplete
+# Modeling 3D Shapes by Reinforcement Learning
 
-ScanComplete is a data-driven approach which takes an incomplete 3D scan of a scene as input and predicts a complete 3D model, along with per-voxel semantic labels. This work is based on our CVPR'18 paper, [ScanComplete: Large-Scale Scene Completion and Semantic Segmentation for 3D Scans](https://arxiv.org/pdf/1712.10215.pdf).
+We made an initial attempt to model 3D shapes like human modelers using deep reinforcement learning (DRL). This repository contains the source code for the paper [Modeling 3D Shapes by Reinforcement Learning](https://arxiv.org/abs/2003.12397).
 
-[<img src="images/teaser_mesh.jpg">](https://arxiv.org/abs/1712.10215)
+<img src="figures/demo-video.gif">
 
 
 ## Code
-### Installation:  
-Training is implemented with [TensorFlow](https://www.tensorflow.org/). This code is tested under TF1.3 and Python 2.7 on Ubuntu 16.04.
+### Installation
+You need to install [PyTorch](https://pytorch.org/), [NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/). This code is tested under Python 3.7.4, PyTorch 1.3.0, NumPy 1.17.2 and SciPy 1.3.1 on Ubuntu 18.04.4.
 
-### Training:  
-* See `run_train.sh` for calling the training (will need to provide a path to the train data).
-* Trained models: [models.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/models.zip)
-### Testing:
-* See `run_complete_scans_hierarchical.sh` for testing on partial scans (needs paths to test data and model).
+The repository contains a part of the code from [binvox](https://www.patrickmin.com/binvox/).
 
-### Data:
-* Test scenes as TF Records: 
-  - [vox5.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/data/test/vox5.zip) (4G)
-  - [vox9.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/data/test/vox9.zip) (620M)
-  - [vox19.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/data/test/vox19.zip) (105M)
-* Train data as TF Records:
-  - [vox19_dim32.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/data/train/vox19_dim32.zip) (12G) for training the 19cm hierarchy level
-  - [vox5-9-19_dim32.zip](http://kaldir.vc.in.tum.de/adai/ScanComplete/data/train/vox5-9-19_dim32.zip) (240G) for training the 9cm and 5cm hierarchy levels. IMPORTANT: For training a hierarchy with more than just the finest level (e.g., 19-9-5 or 9-5 instead of just 5cm), the finer levels should be trained using the results from the trained model from the previous hierarchy level; i.e. this data will need to be edited.
+### Training
+* Train Prim-Agent first
+```
+cd Prim-Agent
+python train.py
+```
+* Then use the trained Prim-Agent to generate primitives and edge loop files for all the data
+```
+python generate_edgeloop.py
+```
+* Train Mesh-Agent using the output of Prim-Agent
+```
+cd Mesh-Agent
+python train.py
+```
+* Will need to provide paths to the training data and saving results & logs when calling
+* Can change the setting by modifying the parameters in `Prim-Agent/config.py` or `Mesh-Agent/config.py` 
 
+### Testing
+* Call `Prim-Agent/test.py` and `Mesh-Agent/test.py` for testing. Will need to provide paths to the data and the pre-trained model when calling.
+
+### Download
+* Data [data.zip](https://drive.google.com/file/d/1inwGXugUEB_vbmTjl33gfWWPhAw594Fv/view?usp=sharing)
+* Pre-trained model [pretrained.zip](https://drive.google.com/file/d/1VTM4--sf0xas29s_frF7_tZsPNFTNcFL/view?usp=sharing)
+* Unzip the downloaded files and use them to replace `data` and `pretrained` folders; then you can directly run the code without modifying the arguments when calling `train.py` and `test.py`
+
+
+## Fast demo
 
 ## Citation:  
 If you find our work useful in your research, please consider citing:
 ```
-@inproceedings{dai2018scancomplete,
-  title={ScanComplete: Large-Scale Scene Completion and Semantic Segmentation for 3D Scans},
-  author={Dai, Angela and Ritchie, Daniel and Bokeloh, Martin and Reed, Scott and Sturm, J{\"u}rgen and Nie{\ss}ner, Matthias},
-  booktitle = {Proc. Computer Vision and Pattern Recognition (CVPR), IEEE},
-  year = {2018}
+@article{lin2020modeling,
+  title={Modeling 3D Shapes by Reinforcement Learning},
+  author={Lin, Cheng and Fan, Tingxiang and Wang, Wenping and Nie{\ss}ner, Matthias},
+  journal={arXiv preprint arXiv:2003.12397},
+  year={2020}
 }
 ```
 
 ## Contact:
-If you have any questions, please email Angela Dai at adai@cs.stanford.edu.
+If you have any questions, please email Cheng Lin at chlin@hku.hk.

@@ -47,7 +47,7 @@ def test(agent, env, shape_list):
         
         shape_infopack=[shape_name, vox_l_fn, vox_h_fn,  prim_mesh_fn, loop_info_fn, shape_ref_type, ref_fn]
         
-        print('Shape:', shape_name)
+        print('Shape:', shape_count, 'name:', shape_name)
         
         valid, s, loop, step = env.reset(shape_infopack)
         if not valid:
@@ -72,7 +72,6 @@ def test(agent, env, shape_list):
                 env.output_result(log_info, save_result_path)
                 break
             
-            # count+=1
             s = s_
             loop = loop_    
             step = step_
@@ -91,7 +90,7 @@ if __name__ == "__main__":
     
     load_net_path=args.load_net + shape_ref_type + '/' + shape_category + '.pth'
 
-    test_shapelist_path=args.data_root + 'shape_list/' + shape_category + '-test.txt'
+    test_shapelist_path=args.data_root + 'shape_list/' + shape_category +'/' + shape_category + '-test.txt'
     
     save_result_path = args.save_result + '/' + shape_category + '/'
     utils.check_dirs([save_result_path])

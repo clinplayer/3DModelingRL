@@ -125,7 +125,6 @@ class Environment():
         return action_map, map_action
     
     
-    #note: this parameter boxes need length larger than 1
     def get_valid_action_mask(self):
         
         valid_mask=np.ones((self.action_num),dtype=np.int)

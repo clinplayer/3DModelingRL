@@ -18,6 +18,6 @@ MEMORY_SELF_CAPACITY = 100000 # shared by D_short and D_self
 DAGGER_EPOCH=1
 DAGGER_ITER=4
 DAGGER_LEARN=4000
-RL_EPOCH=200
+RL_EPOCH=2000
 
                                                                                                                                                                                                                                                                         

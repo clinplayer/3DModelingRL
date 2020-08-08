@@ -1,4 +1,9 @@
 data/*
+!data/README.md
 pretrained/*
+!pretrained/README.md
+log/*
+tmp/*
+save_para/*
 *.pyc
 *.txt
