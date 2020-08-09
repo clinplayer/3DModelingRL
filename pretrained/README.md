@@ -10,7 +10,6 @@ pretrained
 |   |   `-- guitar-03467517.pth
 |   `-- rgb
 |       |-- airplane-02691156.pth
-|       |-- car-02958343-backup.pth
 |       |-- car-02958343.pth
 |       `-- guitar-03467517.pth
 |-- Prim
@@ -21,8 +20,7 @@ pretrained
 |   `-- rgb
 |       |-- airplane-02691156.pth
 |       |-- car-02958343.pth
-|       `-- guitar-03467517.pth
-        `-- guitar-03467517
+        `-- guitar-03467517.pth
 ```
 
 ## Data download

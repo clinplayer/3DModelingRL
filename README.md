@@ -45,7 +45,7 @@ python train.py
 ### Download
 * Data [data.zip](https://drive.google.com/file/d/1inwGXugUEB_vbmTjl33gfWWPhAw594Fv/view?usp=sharing)
 * Pre-trained model [pretrained.zip](https://drive.google.com/file/d/1VTM4--sf0xas29s_frF7_tZsPNFTNcFL/view?usp=sharing)
-* Unzip the downloaded files to replace `data` and `pretrained` folders; then you can directly run the code without modifying the arguments when calling `train.py` and `test.py`.
+* Unzip the downloaded files to replace the `data` and `pretrained` folders; then you can directly run the code without modifying the arguments when calling `train.py` and `test.py`.
 
 
 ## Citation:  
