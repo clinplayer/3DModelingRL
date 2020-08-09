@@ -26,4 +26,4 @@ pretrained
 ```
 
 ## Data download
-To directly train the network without modification, you can download the [pretrained.zip](https://drive.google.com/file/d/1VTM4--sf0xas29s_frF7_tZsPNFTNcFL/view?usp=sharing)
+To directly train the network without modification, you can download the [pretrained.zip](https://drive.google.com/file/d/1VTM4--sf0xas29s_frF7_tZsPNFTNcFL/view?usp=sharing) and use them to replace this folder.

@@ -7,3 +7,5 @@ tmp/*
 save_para/*
 *.pyc
 *.txt
+demo/prim_result/*
+demo/mesh_result/*
