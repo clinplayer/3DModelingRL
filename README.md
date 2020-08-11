@@ -10,8 +10,8 @@ This repository contains the source code for the ECCV 2020 paper [Modeling 3D Sh
 ## Fast demo
 ```
 cd demo
-python prim-agent-demo.py
-python mesh-agent-demo.py
+python prim_agent_demo.py
+python mesh_agent_demo.py
 ```
 This demo takes as input an RGB image for reference. The Prim-Agent will generate a primitive-based representation and create a folder `prim_result/` to save some intermediate results. The Prim-Agent will load the primitives saved in `prim_result/` to edit its mesh; some intermediate results will be saved in `mesh_result/`.
 
