@@ -60,4 +60,4 @@ If you find our work useful in your research, please consider citing:
 ```
 
 ## Contact:
-If you have any questions, please email Cheng Lin at chlin@hku.hk.
+If you have any questions, please email [Cheng Lin](https://github.com/clinplayer) at chlin@hku.hk.
