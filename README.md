@@ -51,11 +51,13 @@ python train.py
 ## Citation:  
 If you find our work useful in your research, please consider citing:
 ```
-@article{lin2020modeling,
-  title={Modeling 3D Shapes by Reinforcement Learning},
+@inproceedings{lin2020modeling,
+  title={Modeling 3d shapes by reinforcement learning},
   author={Lin, Cheng and Fan, Tingxiang and Wang, Wenping and Nie{\ss}ner, Matthias},
-  journal={arXiv preprint arXiv:2003.12397},
-  year={2020}
+  booktitle={European Conference on Computer Vision},
+  pages={545--561},
+  year={2020},
+  organization={Springer}
 }
 ```
 
