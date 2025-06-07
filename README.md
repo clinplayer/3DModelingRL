@@ -43,8 +43,8 @@ python train.py
 * Call `Prim-Agent/test.py` and `Mesh-Agent/test.py` for testing. Will need to provide paths to the data and the pre-trained model when calling.
 
 ### Download
-* Data [data.zip](https://connecthkuhk-my.sharepoint.com/:u:/g/personal/chlin_connect_hku_hk/EZNpj4_VaXZAmVWE6VvEmR8BQreKsUwe0RalStd8X1FEVw?e=jHDO5X)
-* Pre-trained model [pretrained.zip](https://connecthkuhk-my.sharepoint.com/:u:/g/personal/chlin_connect_hku_hk/Efcr1XF9hEdKnyGoqYESSPcBDR_MRqmaEU1dStqwTU6GKQ?e=Zyxtor)
+* Data [data.zip](https://1drv.ms/u/s!AlrKELj1ZvAnfH9CVP2wskvhRTk?e=09qQ9A)
+* Pre-trained model [pretrained.zip](https://1drv.ms/u/s!AlrKELj1ZvAne5qAQmmUxmfNL4o?e=Rmim0j)
 * Unzip the downloaded files to replace the `data` and `pretrained` folders; then you can directly run the code without modifying the arguments when calling `train.py` and `test.py`.
 
 
